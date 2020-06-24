@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { logout } from "../actions/cusActions";
+import { logout } from "../actions/userActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import CartReset from "../components/CartReset";
 
 
-class LogoutCustomer extends Component {
+
+class LogoutUser extends Component {
   static propTypes = {
     logout: PropTypes.func.isRequired,
   };
@@ -15,7 +15,7 @@ class LogoutCustomer extends Component {
     e.preventDefault();
     this.props.logout();
     console.log(
-      axios.get("http://localhost:5000/api/cus/logout").then((response) => {
+      axios.get("http://localhost:5000/api/user/logout").then((response) => {
         if (response.status === 200) {
           //
         } else {
@@ -31,7 +31,7 @@ class LogoutCustomer extends Component {
 
         <button
           className="btn btn-primary"
-          onClick={(this.onClick, (<CartReset />))}
+          onClick={(this.onClick    )}
         >
           Logout
         </button>
@@ -40,4 +40,4 @@ class LogoutCustomer extends Component {
   }
 }
 
-export default connect(null, { logout })(LogoutCustomer);
+export default connect(null, { logout })(LogoutUser);

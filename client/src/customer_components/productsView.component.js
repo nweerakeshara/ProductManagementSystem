@@ -45,7 +45,7 @@ class ProductsViewComponent extends Component {
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
-    cus: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
   };
 ///////////////////////////////////////////////
   onChangeComment = (e) => {
@@ -105,7 +105,7 @@ class ProductsViewComponent extends Component {
   };
 /////////////////////////////////////////////////////////////
   render() {
-    const { isAuthenticated, user } = this.props.cus;
+    const { isAuthenticated, user } = this.props.user;
 
     return (
       <div>
@@ -149,7 +149,7 @@ class ProductsViewComponent extends Component {
             <br />
 
 
-            {this.props.isAuthenticated ? (
+            {isAuthenticated ? (
               <div>
                 <h5>Add Comment :</h5>
                 <form onSubmit={this.onSubmitComment}>
@@ -194,8 +194,8 @@ class ProductsViewComponent extends Component {
 
 const mapStateToProps = (state) => ({
   item: state.item,
-  isAuthenticated: state.cus.isAuthenticated,
-  cus: state.cus,
+  isAuthenticated: state.user.isAuthenticated,
+  user: state.user,
 });
 
 export default connect(mapStateToProps, null)(ProductsViewComponent);

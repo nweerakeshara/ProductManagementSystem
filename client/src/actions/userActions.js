@@ -7,17 +7,17 @@ import axios from 'axios';
 
 /////////////////////////////////////////////////////////////////////////////
 
-export const login = ({cusUn , cusPw}) => dispatch => {
+export const login = ({email , userPw}) => dispatch => {
     const config = {
         headers: {
             'Content-Type' : 'application/json'
         }
     }
-    const body = JSON.stringify({cusUn, cusPw});
+    const body = JSON.stringify({email, userPw});
 
 
 
-    axios.post('http://localhost:5000/api/cus/login', body, config).then(res => dispatch({
+    axios.post('http://localhost:5000/api/user/login', body, config).then(res => dispatch({
         type:LOGIN_SUCCESS,
         payload: res.data
     })).catch(error => {
@@ -34,7 +34,7 @@ export const login = ({cusUn , cusPw}) => dispatch => {
 export const loadUser = () => (dispatch, getState) => {
     dispatch ({type: USER_LOADING});
 
-    axios.get('http://localhost:5000/api/api/cus/get/cus', tokenConfig(getState)).then(res => dispatch({
+    axios.get('http://localhost:5000/api/api/user/get/user', tokenConfig(getState)).then(res => dispatch({
         type: USER_LOADED,
         payload: res.data
     })).catch(error => {
@@ -46,17 +46,17 @@ export const loadUser = () => (dispatch, getState) => {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
-export const register = ({cusUn, cusEmail, cusPw}) => dispatch => {
+export const register = ({email, userPw, fName, lName, phone, addr}) => dispatch => {
     const config = {
         headers: {
             'Content-Type' : 'application/json'
         }
     }
-    const body = JSON.stringify({cusUn,cusEmail,cusPw});
+    const body = JSON.stringify({email, userPw, fName, lName, phone, addr});
 
 
 
-    axios.post('http://localhost:5000/api/cus/register', body, config).then(res => dispatch({
+    axios.post('http://localhost:5000/api/user/register', body, config).then(res => dispatch({
         type:REGISTER_SUCCESS,
         payload: res.data
     })).catch(error => {
@@ -79,7 +79,7 @@ export const logout = () => {
 
 //////////////////////////////////////////////////////////////////////
 export const tokenConfig = (getState) => {
-    const token = getState().cus.token;
+    const token = getState().user.token;
     const config = {
         headers : {
             "Content-type": "application/json"
@@ -87,7 +87,7 @@ export const tokenConfig = (getState) => {
     }
 
     if(token){
-        config.headers['cus_auth'] = token;
+        config.headers['user_auth'] = token;
     }
     return config;
 }

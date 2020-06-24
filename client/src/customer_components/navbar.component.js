@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {Collapse, Nav, Navbar, NavbarToggler, NavbarBrand, NavItem, NavLink, Container} from 'reactstrap';
-import LogoutCustomer from "./logout.component";
+import LogoutUser from "./logout.component";
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -13,7 +13,7 @@ class NavbarComponent extends Component {
 
 
     static propTypes = {
-        cus: PropTypes.object.isRequired
+        user: PropTypes.object.isRequired
     }
 
     toggle = () => {
@@ -23,15 +23,15 @@ class NavbarComponent extends Component {
     }
     render() {
 
-        const {isAuthenticated, user} =  this.props.cus;
-        const cusLinks = (
+        const {isAuthenticated, user} =  this.props.user;
+        const userLinks = (
             <Fragment>
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
                         <NavItem>
                             <Link to={'/'}  className="nav-link"> <button className="btn btn-warning" >
 
-                                  <strong> {user ? `Hi ${user.cusUn}` : null} </strong>
+                                  <strong> {user ? `Hi ${user.fName}` : null} </strong>
 
                             </button>
                             </Link>
@@ -39,7 +39,7 @@ class NavbarComponent extends Component {
                     </li>
                     <li className="nav-item">
                         <NavItem>
-                            <Link  className="nav-link"> <LogoutCustomer/> </Link>
+                            <Link  className="nav-link"> <LogoutUser/> </Link>
 
                         </NavItem>
                     </li>
@@ -52,12 +52,12 @@ class NavbarComponent extends Component {
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
                          <NavItem>
-                                <Link to={'/registerCus'}  className="nav-link"> <button className="btn btn-primary" >Register</button></Link>
+                                <Link to={'/registerUser'}  className="nav-link"> <button className="btn btn-primary" >Register</button></Link>
                          </NavItem>
                     </li>
                     <li className="nav-item">
                          <NavItem>
-                                <Link to={'/loginCus'}  className="nav-link"> <button className="btn btn-primary">Login</button></Link>
+                                <Link to={'/loginUser'}  className="nav-link"> <button className="btn btn-primary">Login</button></Link>
                          </NavItem>
                     </li>
                 </ul>
@@ -68,7 +68,7 @@ class NavbarComponent extends Component {
             <div>
                 <Navbar color="dark" dark expand="sm" className="mb-5">
                     <Container>
-                        <Link to={'/'}  className="nav-link"><NavbarBrand >HINT Fashion</NavbarBrand></Link>
+                        <Link to={'/'}  className="nav-link"><NavbarBrand >Product Management System</NavbarBrand></Link>
 
 
                             <Nav className="ml-auto" navbar>
@@ -76,12 +76,10 @@ class NavbarComponent extends Component {
 
 
                                     <li className="nav-item">
-                                        {isAuthenticated ? cusLinks : guestLinks}
+                                        {isAuthenticated ? userLinks : guestLinks}
                                     </li>
 
-                                    <li className="nav-item">
-                                        <Link to={"/storemanager"} className="nav-link"><button  className="btn btn-secondary ">Employee</button></Link>
-                                    </li>
+
 
                                 </ul>
                             </Nav>
@@ -94,7 +92,7 @@ class NavbarComponent extends Component {
 }
 
 const mapsStateToProps = state => ({
-    cus: state.cus
+    user: state.user
 });
 
 export default connect(mapsStateToProps, null) (NavbarComponent);

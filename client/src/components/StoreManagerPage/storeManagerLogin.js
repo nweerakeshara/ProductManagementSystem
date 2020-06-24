@@ -3,7 +3,7 @@ import swal from "sweetalert";
 import axios from "axios";
 
 
-import {logout} from '../../actions/cusActions';
+import {logout} from '../../actions/userActions';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";

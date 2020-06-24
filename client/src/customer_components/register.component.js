@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { register } from "../actions/cusActions";
+import { register } from "../actions/userActions";
 import { clearErrors } from "../actions/errorActions";
 import { Alert } from "reactstrap";
 import swal from "sweetalert";
 
-class RegisterCustomer extends Component {
+class RegisterUser extends Component {
   state = {
     cusUn: "",
     cusEmail: "",
@@ -115,21 +115,12 @@ class RegisterCustomer extends Component {
   render() {
     return (
       <div style={{ marginTop: 10 }}>
-        <h3>Customer Sign Up</h3>
+        <h3>User Sign Up</h3>
         <form onSubmit={this.onSubmit}>
           {this.state.msgtop ? (
             <Alert color="danger">{this.state.msgtop}</Alert>
           ) : null}
-          <div className="form-group">
-            <label>Username :</label>
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.cusUn}
-              onChange={this.onChangeCusUn}
-              maxLength="10"
-            />
-          </div>
+
 
           <div className="form-group">
             <label>Email Address :</label>
@@ -138,6 +129,50 @@ class RegisterCustomer extends Component {
               className="form-control"
               value={this.state.cusEmail}
               onChange={this.onChangeCusEmail}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>First Name :</label>
+            <input
+                type="text"
+                className="form-control"
+                value={this.state.cusUn}
+                onChange={this.onChangeCusUn}
+                maxLength="10"
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Last Name :</label>
+            <input
+                type="text"
+                className="form-control"
+                value={this.state.cusUn}
+                onChange={this.onChangeCusUn}
+                maxLength="10"
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Phone :</label>
+            <input
+                type="text"
+                className="form-control"
+                value={this.state.cusUn}
+                onChange={this.onChangeCusUn}
+                maxLength="10"
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Address :</label>
+            <input
+                type="text"
+                className="form-control"
+                value={this.state.cusUn}
+                onChange={this.onChangeCusUn}
+                maxLength="10"
             />
           </div>
 
@@ -173,10 +208,10 @@ class RegisterCustomer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.cus.isAuthenticated,
+  isAuthenticated: state.user.isAuthenticated,
   error: state.error,
 });
 
 export default connect(mapStateToProps, { register, clearErrors })(
-  RegisterCustomer
+  RegisterUser
 );

@@ -2,16 +2,16 @@ import React, {Component} from "react";
 import axios from "axios";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {login} from "../actions/cusActions";
+import {login} from "../actions/userActions";
 import {clearErrors} from "../actions/errorActions";
 import {Alert} from 'reactstrap';
 import swal from "sweetalert";
 
-class  LoginCustomer  extends  Component{
+class  LoginUser  extends  Component{
 
     state={
-        cusUn: "",
-        cusPw: "",
+        email: "",
+        userPw: "",
         msg :null
     }
 
@@ -26,8 +26,8 @@ class  LoginCustomer  extends  Component{
     loginClose = () => {
         this.props.clearErrors();
         this.setState({
-            cusUn: "",
-            cusPw: "",
+            email: "",
+            userPw: "",
             msg :null
         });
 
@@ -57,33 +57,33 @@ class  LoginCustomer  extends  Component{
         }
     }
 
-    onChangeCusUn = (e) => {
+    onChangeUserEmail = (e) => {
         this.setState({
-            cusUn: e.target.value
+            email: e.target.value
         });
     }
 
 
-    onChangeCusPw = (e) => {
+    onChangeUserPw = (e) => {
         this.setState({
-            cusPw: e.target.value
+            userPw: e.target.value
         });
     }
 
     onSubmit = (e) => {
         e.preventDefault();
 
-        const {cusUn, cusPw } = this.state;
+        const {email, userPw } = this.state;
         const existUser = {
-            cusUn,
-            cusPw
+            email,
+            userPw
         }
 
         this.props.login(existUser);
 
         this.setState({
-            cusUn: "",
-            cusPw: "",
+            email: "",
+            userPw: "",
             msg :null
         });
     }
@@ -91,19 +91,19 @@ class  LoginCustomer  extends  Component{
     render() {
         return (
             <div style={{marginTop: 10}}>
-                <h3>Customer Sign In</h3>
+                <h3>User Sign In</h3>
                 <form onSubmit={this.onSubmit}>
 
                     <div className="form-group">
-                        <label>Username :</label>
-                        <input type="text" className="form-control" value={this.state.cusUn} onChange={this.onChangeCusUn}/>
+                        <label>Email :</label>
+                        <input type="text" className="form-control" value={this.state.email} onChange={this.onChangeUserEmail}/>
 
                     </div>
 
 
                     <div className="form-group">
                         <label>Password :</label>
-                        <input type="password" className="form-control" value={this.state.cusPw} onChange={this.onChangeCusPw}/>
+                        <input type="password" className="form-control" value={this.state.userPw} onChange={this.onChangeUserPw}/>
 
                     </div>
 
@@ -120,8 +120,8 @@ class  LoginCustomer  extends  Component{
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.cus.isAuthenticated,
+    isAuthenticated: state.user.isAuthenticated,
     error : state.error
 });
 
-export  default connect(mapStateToProps,{login, clearErrors})(LoginCustomer);
+export  default connect(mapStateToProps,{login, clearErrors})(LoginUser);

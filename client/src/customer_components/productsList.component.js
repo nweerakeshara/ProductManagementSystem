@@ -33,7 +33,7 @@ class ProductsListComponent extends Component {
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
-    cus: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
   };
 
   loadPage = () => {
@@ -52,7 +52,7 @@ class ProductsListComponent extends Component {
   };
 
   render() {
-    const { user } = this.props.cus;
+    const { user } = this.props.user;
     const { pager, pageOfItems } = this.state;
     return (
       <div>
@@ -283,8 +283,8 @@ class ProductsListComponent extends Component {
 
 const mapStateToProps = (state) => ({
   item: state.item,
-  isAuthenticated: state.cus.isAuthenticated,
-  cus: state.cus,
+  isAuthenticated: state.user.isAuthenticated,
+  user: state.user,
 });
 
 export default connect(mapStateToProps, null)(ProductsListComponent);
