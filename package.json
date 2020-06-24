@@ -1,0 +1,35 @@
+{
+  "name": "ProductManagement",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js",
+    "client": "npm run start --prefix client",
+    "api": "nodemon server/index.js",
+    "dev": "concurrently \"npm run api\" \"npm run start --prefix client\""
+  },
+  "author": "Nuwanga",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.2.0",
+    "config": "^3.3.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "jw-paginate": "^1.0.4",
+    "mongoose": "^5.9.13",
+
+    "react-bootstrap-sweetalert": "^5.1.9",
+    "reactstrap": "^8.4.1",
+    "disable-browser-back-navigation": "^0.1.0",
+    "sweetalert": "^2.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
