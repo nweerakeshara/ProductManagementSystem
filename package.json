@@ -23,7 +23,6 @@
     "jsonwebtoken": "^8.5.1",
     "jw-paginate": "^1.0.4",
     "mongoose": "^5.9.13",
-
     "react-bootstrap-sweetalert": "^5.1.9",
     "reactstrap": "^8.4.1",
     "disable-browser-back-navigation": "^0.1.0",

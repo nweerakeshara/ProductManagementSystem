@@ -78,7 +78,7 @@ router.post('/login', (req,res) =>{
 
     User.findOne({email}).then(user => {
         if(!user){
-            return res.status(400).json({msg : 'Invalid Username'})
+            return res.status(400).json({msg : 'Invalid Email'})
         }
 
         bcrypt.compare(userPw, user.userPw).then(result => {

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../actions/userActions";
@@ -9,11 +8,14 @@ import swal from "sweetalert";
 
 class RegisterUser extends Component {
   state = {
-    cusUn: "",
-    cusEmail: "",
-    cusPw: "",
-    cusConfirmPw: "",
-    msg: null,
+    email: "",
+    fName: "",
+    lName: "",
+    userPw: "",
+    userConfirmPw: "",
+    phone: "",
+    addr: "",
+    msg: null
   };
 
   static propTypes = {
@@ -26,12 +28,14 @@ class RegisterUser extends Component {
   registerClose = () => {
     this.props.clearErrors();
     this.setState({
-      cusUn: "",
-      cusEmail: "",
-      cusPw: "",
-      cusConfirmPw: "",
-      msg: null,
-      msgtop: null,
+      email: "",
+      fName: "",
+      lName: "",
+      userPw: "",
+      userConfirmPw: "",
+      phone: "",
+      addr: "",
+      msg: null
     });
 
     this.props.history.push("/");
@@ -57,34 +61,52 @@ class RegisterUser extends Component {
     }
   };
 
-  onChangeCusUn = (e) => {
+  onChangeFName = (e) => {
     this.setState({
-      cusUn: e.target.value,
+      fName: e.target.value,
     });
   };
 
-  onChangeCusEmail = (e) => {
+  onChangeLName = (e) => {
     this.setState({
-      cusEmail: e.target.value,
+      lName: e.target.value,
     });
   };
 
-  onChangeCusPw = (e) => {
+  onChangePhone = (e) => {
     this.setState({
-      cusPw: e.target.value,
+      phone: e.target.value,
     });
   };
 
-  onChangeCusConfirmPw = (e) => {
-    if (e.target.value !== this.state.cusPw) {
+  onChangeAddr = (e) => {
+    this.setState({
+      addr: e.target.value,
+    });
+  };
+
+  onChangeEmail = (e) => {
+    this.setState({
+      email: e.target.value,
+    });
+  };
+
+  onChangeUserPw = (e) => {
+    this.setState({
+      userPw: e.target.value,
+    });
+  };
+
+  onChangeUserConfirmPw = (e) => {
+    if (e.target.value !== this.state.userPw) {
       this.setState({
-        cusConfirmPw: e.target.value,
+        userConfirmPw: e.target.value,
         msgtop: "Confirm Password Does Not Match",
       });
     }
-    if (e.target.value === this.state.cusPw) {
+    if (e.target.value === this.state.userPw) {
       this.setState({
-        cusConfirmPw: e.target.value,
+        userConfirmPw: e.target.value,
         msgtop: "",
       });
     }
@@ -93,22 +115,27 @@ class RegisterUser extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { cusUn, cusEmail, cusPw } = this.state;
+    const { email, fName, lName, userPw, phone,  addr} = this.state;
     const newUser = {
-      cusUn,
-      cusEmail,
-      cusPw,
+      email,
+      fName,
+      lName,
+      userPw,
+      phone,
+      addr
     };
 
     this.props.register(newUser);
 
     this.setState({
-      cusUn: "",
-      cusEmail: "",
-      cusPw: "",
-      cusConfirmPw: "",
-      msg: null,
-      msgtop: null,
+      email: "",
+      fName: "",
+      lName: "",
+      userPw: "",
+      userConfirmPw: "",
+      phone: "",
+      addr: "",
+      msg: null
     });
   };
 
@@ -127,8 +154,8 @@ class RegisterUser extends Component {
             <input
               type="email"
               className="form-control"
-              value={this.state.cusEmail}
-              onChange={this.onChangeCusEmail}
+              value={this.state.email}
+              onChange={this.onChangeEmail}
             />
           </div>
 
@@ -137,9 +164,9 @@ class RegisterUser extends Component {
             <input
                 type="text"
                 className="form-control"
-                value={this.state.cusUn}
-                onChange={this.onChangeCusUn}
-                maxLength="10"
+                value={this.state.fName}
+                onChange={this.onChangeFName}
+
             />
           </div>
 
@@ -148,9 +175,9 @@ class RegisterUser extends Component {
             <input
                 type="text"
                 className="form-control"
-                value={this.state.cusUn}
-                onChange={this.onChangeCusUn}
-                maxLength="10"
+                value={this.state.lName}
+                onChange={this.onChangeLName}
+
             />
           </div>
 
@@ -159,9 +186,9 @@ class RegisterUser extends Component {
             <input
                 type="text"
                 className="form-control"
-                value={this.state.cusUn}
-                onChange={this.onChangeCusUn}
-                maxLength="10"
+                value={this.state.phone}
+                onChange={this.onChangePhone}
+
             />
           </div>
 
@@ -170,9 +197,9 @@ class RegisterUser extends Component {
             <input
                 type="text"
                 className="form-control"
-                value={this.state.cusUn}
-                onChange={this.onChangeCusUn}
-                maxLength="10"
+                value={this.state.addr}
+                onChange={this.onChangeAddr}
+
             />
           </div>
 
@@ -181,8 +208,8 @@ class RegisterUser extends Component {
             <input
               type="password"
               className="form-control"
-              value={this.state.cusPw}
-              onChange={this.onChangeCusPw}
+              value={this.state.userPw}
+              onChange={this.onChangeUserPw}
               minLength="5"
             />
           </div>
@@ -192,8 +219,8 @@ class RegisterUser extends Component {
             <input
               type="password"
               className="form-control"
-              value={this.state.cusConfirmPw}
-              onChange={this.onChangeCusConfirmPw}
+              value={this.state.userConfirmPw}
+              onChange={this.onChangeUserConfirmPw}
               minLength="5"
             />
           </div>

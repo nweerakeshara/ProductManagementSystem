@@ -2,19 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import {
-    NotificationContainer,
-    NotificationManager,
-} from "react-notifications";
 import "react-notifications/lib/notifications.css";
-import disableBrowserBackButton from "disable-browser-back-navigation";
 
 
-import ModalPrompt from "../components/UI/ModalPrompt";
-import Cart from "../components/Cart";
-import WishList from "../components/WishList";
-import WishListView from "../components/WishList.view";
-import Carousel from "../components/UI/Carousel";
 
 class SearchProductsListComponent extends Component {
     state = {
@@ -27,7 +17,7 @@ class SearchProductsListComponent extends Component {
 
     static propTypes = {
         isAuthenticated: PropTypes.bool,
-        cus: PropTypes.object.isRequired,
+        user: PropTypes.object.isRequired,
     };
 
     setSearch = (e) => {
@@ -44,7 +34,7 @@ class SearchProductsListComponent extends Component {
         const params = new URLSearchParams(window.location.search);
         const page = parseInt(params.get("page")) || 1;
         if (page !== this.state.pager.currentPage) {
-            fetch(`http://localhost:5000/api/items/get/all/paginate/search?page=${page}&sitem=${this.state.query}`, {
+            fetch(`http://localhost:5000/api/products/get/all/paginate/search?page=${page}&sitem=${this.state.query}`, {
                 method: "GET",
             })
                 .then((response) => response.json())
@@ -52,33 +42,15 @@ class SearchProductsListComponent extends Component {
                     this.setState({ pager, pageOfItems });
                 });
         }
-        this.setState({
-            query: ""
-        });
+
     };
 
     render() {
-        const { user } = this.props.cus;
+
         const { pager, pageOfItems } = this.state;
         return (
             <div>
-                <div className="row mx-md-n5">
-                    <div style={{width:"50px", display:"inline-block"}} />
 
-                    <div>
-                            {this.props.isAuthenticated ? <Cart /> : ""}
-                    </div>
-
-                    <div style={{width:"25px", display:"inline-block"}} />
-
-                    <div>
-                            {this.props.isAuthenticated ? (
-                                <WishListView usr_id={user._id} />
-                            ) : (
-                                ""
-                            )}
-                    </div>
-                </div>
 
                 <div style={{height:"50px"}} />
                 {/*--------------------------------------------------------------------------------------------------*/}
@@ -105,9 +77,9 @@ class SearchProductsListComponent extends Component {
 
 
                 <div className="card text-center m-3">
-                    <h3 className="card-header font-weight-bold">Clothing List</h3>
+                    <h3 className="card-header font-weight-bold">Product List</h3>
 
-                    <NotificationContainer />
+
                     <div className="card-body ">
                         {pageOfItems.map((item) => (
                             <div key={item._id}>
@@ -116,106 +88,38 @@ class SearchProductsListComponent extends Component {
                                         <div className="row">
                                             <div className="col-sm">
                                                 <br />
-                                                <img
-                                                    height="80%"
-                                                    width="100%"
-                                                    src={`/uploads/${item.imageData}`}
-                                                />
+                                                <h4 className="font-weight-bold text-center">
+                                                    Name : {item.name}
+                                                </h4>
                                                 <br />
                                             </div>
                                             <div className="col-sm">
+
                                                 <br />
-                                                <br />
-                                                <br />
-                                                <h5 className="font-weight-bold text-center">
-                                                    {item.product_name}
-                                                </h5>
-                                                <h4 className="font-weight-bold text-center text-danger">
-                                                    Price : Rs {item.product_price}.00
+                                                <h4 className="font-weight-bold text-center">
+                                                    Qty : {item.qty}
                                                 </h4>
-                                                <h5 className="font-weight-bold text-center text-danger">
-                                                    Discount : Rs {item.product_discount}.00
-                                                </h5>
                                                 <br />
-                                                <br />
+
                                             </div>
 
                                             <div className="col-sm">
                                                 <br />
-                                                <br />
+
                                                 <Link
                                                     style={{ margin: "0", padding: "0" }}
                                                     to={"/view/" + item._id}
                                                     className="nav-link"
                                                 >
                                                     <button className="btn btn-success btn-block">
-                                                        View This Item{" "}
+                                                        View Product
                                                     </button>
-                                                    <br></br>
+                                                    <br/>
                                                 </Link>
 
-                                                {this.props.isAuthenticated ? (
-                                                    <div>
-                                                        <ModalPrompt
-                                                            id={item._id}
-                                                            name={item.product_name}
-                                                            price={item.product_price}
-                                                        ></ModalPrompt>
-                                                        <br />
-                                                    </div>
-                                                ) : (
-                                                    <Link
-                                                        style={{ margin: "0", padding: "0" }}
-                                                        className="nav-link"
-                                                    >
-                                                        <button
-                                                            className="btn btn-danger btn-block"
-                                                            onClick={() =>
-                                                                NotificationManager.error(
-                                                                    "Login to Continue",
-                                                                    "",
-                                                                    2000
-                                                                )
-                                                            }
-                                                        >
-                                                            Add To Shopping Cart
-                                                        </button>
-                                                        <br></br>
-                                                    </Link>
-                                                )}
 
-                                                {this.props.isAuthenticated ? (
-                                                    <div className="btn-block">
-                                                        <WishList
-                                                            name={item.product_name}
-                                                            price={item.product_price}
-                                                            id={item._id}
-                                                            usr_id={user._id}
-                                                            img_id={item.imageData}
-                                                        />
-                                                    </div>
-                                                ) : (
-                                                    <Link
-                                                        className="nav-link"
-                                                        style={{ margin: "0", padding: "0" }}
-                                                    >
-                                                        <button
-                                                            className="btn btn-info text-light btn-block"
-                                                            onClick={() =>
-                                                                NotificationManager.error(
-                                                                    "Login to Continue",
-                                                                    "",
-                                                                    2000
-                                                                )
-                                                            }
-                                                        >
-                                                            Add To Wish List
-                                                        </button>
-                                                    </Link>
-                                                )}
 
-                                                <br />
-                                                <br />
+
                                             </div>
                                         </div>
                                     </div>
@@ -303,8 +207,8 @@ class SearchProductsListComponent extends Component {
 
 const mapStateToProps = (state) => ({
     item: state.item,
-    isAuthenticated: state.cus.isAuthenticated,
-    cus: state.cus,
+    isAuthenticated: state.user.isAuthenticated,
+    user: state.user,
 });
 
 export default connect(mapStateToProps, null)(SearchProductsListComponent);

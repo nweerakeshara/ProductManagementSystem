@@ -1,7 +1,7 @@
 const paginate = require('jw-paginate');
 const express = require('express');
 const router = express.Router();
-const Products = require('../model/products');
+const {Products} = require('../model/products');
 
 router.get('/get/all/paginate', (req,res) => {
    Products.find().then(items => {
@@ -9,7 +9,7 @@ router.get('/get/all/paginate', (req,res) => {
       const page = parseInt(req.query.page) || 1;
 
       // get size of items that should display
-      const pageSize = 5;
+      const pageSize = 10;
       const pager = paginate(items.length, page, pageSize);
 
       // get the page number from item list
@@ -28,12 +28,12 @@ router.get('/get/all/paginate', (req,res) => {
 
 
 router.get('/get/all/paginate/search', (req,res) => {
-   Products.find({ product_name: new RegExp(req.query.sitem, 'i')   }).then(items => {
+   Products.find({ name: new RegExp(req.query.sitem, 'i')   }).then(items => {
 
       const page = parseInt(req.query.page) || 1;
 
       // get size of items that should display
-      const pageSize = 5;
+      const pageSize = 10;
       const pager = paginate(items.length, page, pageSize);
 
       // get the page number from item list
@@ -48,7 +48,7 @@ router.get('/get/all/paginate/search', (req,res) => {
 });
 
 //////////////////////////////////////////////////////////////
-router.get("/edit/:id", (req, res)=> {
+router.get("/getProduct/:id", (req, res)=> {
    let id = req.params.id;
    Products.findById(id, function (err, product) {
       res.json(product);
@@ -57,9 +57,8 @@ router.get("/edit/:id", (req, res)=> {
 
 /////////////////////////////////////////////////////////////////
 router.post("/add", (req, res) => {
-   let Products = new Products(req.body);
-   Products
-       .save()
+   const products = new Products(req.body);
+   products.save()
        .then((data) => {
           res.json({ success: true });
        })

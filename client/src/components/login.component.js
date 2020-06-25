@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {login} from "../actions/userActions";
 import {clearErrors} from "../actions/errorActions";
-import {Alert} from 'reactstrap';
 import swal from "sweetalert";
 
 class  LoginUser  extends  Component{

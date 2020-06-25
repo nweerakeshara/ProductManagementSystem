@@ -3,13 +3,13 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
-import RegisterUser from "./customer_components/register.component";
-import LoginUser from "./customer_components/login.component";
-import NavbarComponent from "./customer_components/navbar.component";
-import ProductList from "./customer_components/productsList.component";
-import ProductViewComponent from "./customer_components/productsView.component";
-import SearchProductListComponent from "./customer_components/searchProductsList.component";
-import AddProductComponent from "./customer_components/addProducts.component";
+import RegisterUser from "./components/register.component";
+import LoginUser from "./components/login.component";
+import NavbarComponent from "./components/navbar.component";
+import ProductList from "./components/productsList.component";
+import ProductViewComponent from "./components/productsView.component";
+import SearchProductListComponent from "./components/searchProductsList.component";
+import AddProductOrLoginComponent from "./components/addProductOrLogin.component";
 
 import {Provider} from 'react-redux';
 import store from './store';
@@ -32,7 +32,7 @@ class App extends Component {
 
              <Router>
                  <Provider store={store}>
-                     <CartProvider>
+
                          <NavbarComponent/>
                          <div className="container">
 
@@ -42,13 +42,13 @@ class App extends Component {
                                  <Route exact path='/' component={ProductList}/>
                                  <Route exact path='/registerUser' component={RegisterUser}/>
                                  <Route exact path='/loginUser' component={LoginUser}/>
-                                 <Route exact path="/addProduct" component={AddProductComponent}/>
-                                 <Route exact path="/view/:id" component={ProductViewComponent}/>
+                                 <Route exact path='/addProduct' component={AddProductOrLoginComponent}/>
+                                 <Route exact path='/view/:id' component={ProductViewComponent}/>
                                  <Route exact path='/search' component={SearchProductListComponent}/>
 
                              </Switch>
                          </div>
-                     </CartProvider>
+
                  </Provider>
              </Router>
 

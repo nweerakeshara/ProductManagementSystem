@@ -39,6 +39,11 @@ class NavbarComponent extends Component {
                     </li>
                     <li className="nav-item">
                         <NavItem>
+                            <Link to={'/addProduct'}  className="nav-link"> <button className="btn btn-danger" >Add Product</button></Link>
+                        </NavItem>
+                    </li>
+                    <li className="nav-item">
+                        <NavItem>
                             <Link  className="nav-link"> <LogoutUser/> </Link>
 
                         </NavItem>

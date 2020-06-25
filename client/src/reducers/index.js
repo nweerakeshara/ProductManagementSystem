@@ -1,12 +1,11 @@
 import {combineReducers} from "redux";
-import cusReducer from './cusReducer';
-import itemReducer from './itemReducer';
+import userReducer from './userReducer';
 import errorReducer from './errorReducer';
 
 
 export default combineReducers({
 
-    item : itemReducer,
-    cus : cusReducer,
+
+    user : userReducer,
     error : errorReducer
 });
