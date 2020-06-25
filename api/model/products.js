@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 
 
-
+/*Product Model*/
 const productSchema = mongoose.Schema({
 
     name: {

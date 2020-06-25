@@ -141,7 +141,9 @@ class RegisterUser extends Component {
 
   render() {
     return (
+
       <div style={{ marginTop: 10 }}>
+        {/*To Register*/}
         <h3>User Sign Up</h3>
         <form onSubmit={this.onSubmit}>
           {this.state.msgtop ? (

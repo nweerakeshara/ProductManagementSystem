@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "react-notifications/lib/notifications.css";
 import axios from "axios";
-import {Link} from "react-router-dom";
+
 
 
 class ProductsViewComponent extends Component {
@@ -18,7 +18,7 @@ class ProductsViewComponent extends Component {
   componentDidMount() {
     axios
       .get(
-        "http://localhost:5000/api/products/getProduct/" + this.props.match.params.id
+        "http://localhost:5000/api/products/getProduct/" + this.props.match.params.id //Request to api
       )
       .then((response) => {
         this.setState({
@@ -38,7 +38,7 @@ class ProductsViewComponent extends Component {
 
     axios
         .get(
-            "http://localhost:5000/api/products/getProduct/" + this.props.match.params.id
+            "http://localhost:5000/api/products/getProduct/" + this.props.match.params.id //Request to api
         )
         .then((response) => {
           this.setState({

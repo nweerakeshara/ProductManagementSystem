@@ -4,11 +4,11 @@ const {User} = require('../model/user');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
-const auth = require('../middleware/auth');
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+/*To register new user*/
 router.post('/register', (req,res) =>{
 
     //To register cus
@@ -29,6 +29,7 @@ router.post('/register', (req,res) =>{
 
     const user = new User(req.body);
 
+    /*password will be encrypted here*/
     bcrypt.genSalt(10, (err, salt) => {
 
         bcrypt.hash(user.userPw, saltRounds, function(error, hash) {
@@ -39,6 +40,7 @@ router.post('/register', (req,res) =>{
 
             user.save().then(user  => {
 
+                /*Sent to local storage and saved there*/
                 jwt.sign(
                     {_id : user._id}, "secret", {expiresIn: 10},
                     (error, token) =>{
@@ -66,7 +68,7 @@ router.post('/register', (req,res) =>{
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-
+/*for user login*/
 router.post('/login', (req,res) =>{
 
     //To login cus
@@ -89,6 +91,7 @@ router.post('/login', (req,res) =>{
 
             }
 
+            /*Sent to local storage and saved there*/
             jwt.sign(
                 {_id : user._id}, "secret", {expiresIn: 3500},
                 (error, token) =>{
@@ -115,8 +118,5 @@ router.post('/login', (req,res) =>{
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-router.get('/get/user', auth, (req, res) => {
-    User.findById(req.user._id).select('-userPw').then(user => res.json(user));
-});
 
 module.exports = router;

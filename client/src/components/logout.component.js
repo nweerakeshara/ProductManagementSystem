@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { logout } from "../actions/userActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -14,15 +13,7 @@ class LogoutUser extends Component {
   onClick = (e) => {
     e.preventDefault();
     this.props.logout();
-    console.log(
-      axios.get("http://localhost:5000/api/user/logout").then((response) => {
-        if (response.status === 200) {
-          //
-        } else {
-          alert("Log Out Failed");
-        }
-      })
-    );
+    /*User will be logged out*/
   };
 
   render() {

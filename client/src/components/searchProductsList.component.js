@@ -34,6 +34,7 @@ class SearchProductsListComponent extends Component {
         const params = new URLSearchParams(window.location.search);
         const page = parseInt(params.get("page")) || 1;
         if (page !== this.state.pager.currentPage) {
+            //Request to api
             fetch(`http://localhost:5000/api/products/get/all/paginate/search?page=${page}&sitem=${this.state.query}`, {
                 method: "GET",
             })
@@ -128,6 +129,8 @@ class SearchProductsListComponent extends Component {
                             </div>
                         ))}
                     </div>
+
+                    {/*Used for pagination*/}
                     <div className="card-footer pb-0 pt-3">
                         {pager.pages && pager.pages.length && (
                             <ul className="pagination">
@@ -206,7 +209,7 @@ class SearchProductsListComponent extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    item: state.item,
+
     isAuthenticated: state.user.isAuthenticated,
     user: state.user,
 });

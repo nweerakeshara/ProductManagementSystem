@@ -22,7 +22,7 @@ class addProductOrLoginComponent extends Component {
 
                 <br/>
 
-
+                {/*Check whether user is logged in, Then determine AddProductComponent should be loaded or LoginUser Component should be loaded*/}
                 {isAuthenticated ? (
                     <AddProductComponent  uid={user._id}/>
                 ) : <LoginUser/>}

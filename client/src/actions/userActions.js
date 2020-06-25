@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 /////////////////////////////////////////////////////////////////////////////
-
+/*Action For Login*/
 export const login = ({email , userPw}) => dispatch => {
     const config = {
         headers: {
@@ -16,7 +16,7 @@ export const login = ({email , userPw}) => dispatch => {
     const body = JSON.stringify({email, userPw});
 
 
-
+    //Request to api
     axios.post('http://localhost:5000/api/user/login', body, config).then(res => dispatch({
         type:LOGIN_SUCCESS,
         payload: res.data
@@ -34,6 +34,7 @@ export const login = ({email , userPw}) => dispatch => {
 export const loadUser = () => (dispatch, getState) => {
     dispatch ({type: USER_LOADING});
 
+    //Request to api
     axios.get('http://localhost:5000/api/api/user/get/user', tokenConfig(getState)).then(res => dispatch({
         type: USER_LOADED,
         payload: res.data
@@ -46,6 +47,7 @@ export const loadUser = () => (dispatch, getState) => {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
+/*Action For Register*/
 export const register = ({email, userPw, fName, lName, phone, addr}) => dispatch => {
     const config = {
         headers: {
@@ -56,6 +58,7 @@ export const register = ({email, userPw, fName, lName, phone, addr}) => dispatch
 
 
 
+    //Request to api
     axios.post('http://localhost:5000/api/user/register', body, config).then(res => dispatch({
         type:REGISTER_SUCCESS,
         payload: res.data
@@ -68,7 +71,7 @@ export const register = ({email, userPw, fName, lName, phone, addr}) => dispatch
 
 }
 /////////////////////////////////////////////////////////////////////
-
+/*Action For Logout*/
 export const logout = () => {
     return{
         type : LOGOUT_SUCCESS

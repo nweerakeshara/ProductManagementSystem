@@ -31,6 +31,7 @@ class ProductsListComponent extends Component {
     const params = new URLSearchParams(window.location.search);
     const page = parseInt(params.get("page")) || 1;
     if (page !== this.state.pager.currentPage) {
+      //Request to api
       fetch(`http://localhost:5000/api/products/get/all/paginate?page=${page}`, {
         method: "GET",
       })
@@ -113,6 +114,8 @@ class ProductsListComponent extends Component {
               </div>
             ))}
           </div>
+
+          {/*For Pagination*/}
           <div className="card-footer pb-0 pt-3">
             {pager.pages && pager.pages.length && (
               <ul className="pagination">

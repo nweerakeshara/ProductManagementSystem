@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Collapse, Nav, Navbar, NavbarToggler, NavbarBrand, NavItem, NavLink, Container} from 'reactstrap';
+import { Nav, Navbar,  NavbarBrand, NavItem,  Container} from 'reactstrap';
 import LogoutUser from "./logout.component";
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
@@ -79,7 +79,7 @@ class NavbarComponent extends Component {
                             <Nav className="ml-auto" navbar>
                                 <ul className="navbar-nav ">
 
-
+                                    {/*If Authenticated userLinks will be loaded, If not guest links*/}
                                     <li className="nav-item">
                                         {isAuthenticated ? userLinks : guestLinks}
                                     </li>

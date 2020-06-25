@@ -58,9 +58,9 @@ class addProductsComponent extends Component {
         };
 
         axios
-            .post("http://localhost:5000/api/products/add", product)
+            .post("http://localhost:5000/api/products/add", product) //Request to api
             .then((res) => {
-                if (res.data.success == true) {
+                if (res.data.success === true) {
                     swal("Successful", "Product Added", "success");
                 } else {
                     swal("Unsuccessful", "Product Failed", "error");
@@ -88,7 +88,7 @@ class addProductsComponent extends Component {
                 <br/>
 
 
-
+                            {/*Use to Add Product*/}
                             <div>
                                 <h5>Add Product :</h5>
                                 <form onSubmit={this.onSubmitProduct}>

@@ -1,17 +1,18 @@
 import React from "react";
 import { UncontrolledCarousel } from "reactstrap";
 
+/*Simple Slide Show*/
 const items = [
   {
     src:
-      //   "https://images.pexels.com/photos/298864/pexels-photo-298864.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+
       "/images/slide1.jpg",
     altText: "Slide 1",
     key: "1",
   },
   {
     src:
-      //   "https://images.pexels.com/photos/285171/pexels-photo-285171.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+
         "/images/slide2.jpeg",
     altText: "Slide 2",
 

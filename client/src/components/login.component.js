@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import axios from "axios";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {login} from "../actions/userActions";
@@ -89,6 +88,7 @@ class  LoginUser  extends  Component{
 
     render() {
         return (
+            /*User Login*/
             <div style={{marginTop: 10}}>
                 <h3>User Sign In</h3>
                 <form onSubmit={this.onSubmit}>

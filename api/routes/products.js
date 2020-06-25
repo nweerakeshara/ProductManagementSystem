@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const {Products} = require('../model/products');
 
+/*Get products by applying pagination*/
 router.get('/get/all/paginate', (req,res) => {
    Products.find().then(items => {
 
@@ -26,7 +27,7 @@ router.get('/get/all/paginate', (req,res) => {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
+/*Get products by applying pagination when a search query is given*/
 router.get('/get/all/paginate/search', (req,res) => {
    Products.find({ name: new RegExp(req.query.sitem, 'i')   }).then(items => {
 
@@ -48,6 +49,7 @@ router.get('/get/all/paginate/search', (req,res) => {
 });
 
 //////////////////////////////////////////////////////////////
+/*To get an individual product detail. Used in Product View */
 router.get("/getProduct/:id", (req, res)=> {
    let id = req.params.id;
    Products.findById(id, function (err, product) {
@@ -56,6 +58,7 @@ router.get("/getProduct/:id", (req, res)=> {
 });
 
 /////////////////////////////////////////////////////////////////
+/*To add Product*/
 router.post("/add", (req, res) => {
    const products = new Products(req.body);
    products.save()
